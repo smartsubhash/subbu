@@ -1,0 +1,261 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Header styles are now in header.css */
+
+/* Hero Section */
+.hero {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background: url('https://source.unsplash.com/1600x900/?sky,clouds,environment') no-repeat center center/cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #fff;
+    margin-top: 0;
+}
+
+.overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.content {
+    position: relative;
+    z-index: 1;
+    padding: 0 20px;
+}
+
+.content h1 {
+    font-size: 50px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.content p {
+    font-size: 24px;
+    margin: 10px 0;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 24px;
+    background: #FF5733;
+    color: #fff;
+    text-decoration: none;
+    font-size: 20px;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+.btn:hover {
+    background: #C70039;
+}
+
+/* About Section Styling */
+.about-app {
+    background-color: #f4f7fb;
+    padding: 50px 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.about-app .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.text-content {
+    flex: 1;
+    min-width: 300px;
+    padding: 20px;
+    color: #333;
+    line-height: 1.8;
+}
+
+.text-content h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.text-content p {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.text-content ul {
+    list-style: disc;
+    padding-left: 20px;
+    font-size: 18px;
+    color: #333;
+}
+
+.image-content {
+    flex: 1;
+    min-width: 300px;
+    padding: 20px;
+    text-align: center;
+}
+
+.app-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Flash Messages */
+.flash-container {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.flash-message {
+    background-color: #FF5733;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    animation: fadeOut 5s forwards;
+}
+
+@keyframes fadeOut {
+    0% { opacity: 1; }
+    80% { opacity: 1; }
+    100% { opacity: 0; display: none; }
+}
+
+/* Inspirational Quotes Section */
+.quote-section {
+    background-color: #2a2f3a;
+    color: #fff;
+    padding: 50px 0;
+}
+
+.quote-section .container {
+    max-width: 1000px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.quote-section h2 {
+    font-size: 36px;
+    margin-bottom: 30px;
+}
+
+.quote {
+    font-size: 22px;
+    font-style: italic;
+    color: #fff;
+    margin: 30px 0;
+    line-height: 1.8;
+}
+
+.quote p {
+    margin: 10px 0;
+    font-weight: normal;
+}
+
+/* Get Started Section */
+#surveySection {
+    background-color: #fff;
+    padding: 50px 0;
+    text-align: center;
+}
+
+#surveySection h2 {
+    font-size: 32px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+#surveySection p {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 30px;
+    line-height: 1.8;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Dashboard Section */
+.dashboard-link {
+    text-align: center;
+    margin: 20px 0 40px;
+}
+
+.dashboard-btn {
+    display: inline-block;
+    padding: 12px 24px;
+    background: #2a2f3a;
+    color: #fff;
+    text-decoration: none;
+    font-size: 20px;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+.dashboard-btn:hover {
+    background: #1a1e25;
+}
+
+footer {
+    background: #333;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+    margin-top: 30px;
+}
+
+/* Responsive Styling */
+@media screen and (max-width: 768px) {
+    header {
+        padding: 15px 20px;
+        flex-direction: column;
+    }
+    
+    .logo {
+        margin-bottom: 15px;
+    }
+    
+    .content h1 {
+        font-size: 36px;
+    }
+    
+    .content p {
+        font-size: 18px;
+    }
+    
+    .about-app .container {
+        flex-direction: column;
+    }
+    
+    .text-content, .image-content {
+        flex: none;
+        width: 100%;
+    }
+}

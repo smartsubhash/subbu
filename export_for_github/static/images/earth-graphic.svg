@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <!-- Earth -->
+  <circle cx="400" cy="300" r="200" fill="#2196F3" />
+  
+  <!-- Land masses (continents) -->
+  <path d="M300,150 Q350,100 400,150 Q450,200 500,150 Q530,180 550,200 Q500,250 520,300 Q500,350 450,320 Q400,350 350,300 Q300,320 250,250 Q280,200 300,150" fill="#4CAF50" />
+  <path d="M280,400 Q320,380 350,400 Q380,420 410,400 Q450,380 480,420 Q440,450 400,440 Q360,460 320,430 Q290,410 280,400" fill="#4CAF50" />
+  
+  <!-- Pollution cloud -->
+  <path d="M600,100 Q650,80 700,100 Q730,120 700,150 Q680,170 650,160 Q620,170 600,150 Q580,130 600,100" fill="#424242" opacity="0.8" />
+  <path d="M580,120 L700,120" stroke="#424242" stroke-width="8" opacity="0.7" />
+  <path d="M590,140 L690,140" stroke="#424242" stroke-width="8" opacity="0.7" />
+  <path d="M600,160 L680,160" stroke="#424242" stroke-width="8" opacity="0.7" />
+  
+  <!-- Factory with smokestack -->
+  <rect x="580" y="170" width="80" height="60" fill="#795548" />
+  <rect x="600" y="110" width="20" height="60" fill="#795548" />
+  
+  <!-- Windows on factory -->
+  <rect x="590" y="180" width="15" height="15" fill="#FFC107" />
+  <rect x="615" y="180" width="15" height="15" fill="#FFC107" />
+  <rect x="640" y="180" width="15" height="15" fill="#FFC107" />
+  
+  <!-- Trees/Plants -->
+  <circle cx="200" cy="320" r="30" fill="#388E3C" />
+  <rect x="195" y="320" width="10" height="40" fill="#795548" />
+  
+  <circle cx="150" cy="350" r="25" fill="#388E3C" />
+  <rect x="145" y="350" width="10" height="35" fill="#795548" />
+  
+  <circle cx="250" cy="370" r="35" fill="#388E3C" />
+  <rect x="245" y="370" width="10" height="45" fill="#795548" />
+  
+  <!-- Measurement/monitoring icon -->
+  <circle cx="450" cy="150" r="20" fill="white" stroke="#FF5722" stroke-width="3" />
+  <line x1="450" y1="135" x2="450" y2="165" stroke="#FF5722" stroke-width="3" />
+  <line x1="435" y1="150" x2="465" y2="150" stroke="#FF5722" stroke-width="3" />
+  
+  <!-- Text -->
+  <text x="400" y="520" text-anchor="middle" font-family="Arial" font-size="24" fill="#333">
+    Air Quality Monitoring
+  </text>
+</svg>

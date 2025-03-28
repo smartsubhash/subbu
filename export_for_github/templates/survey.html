@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Air Quality Survey - Pollution Monitoring System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/survey_style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/header.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Earth Header Image -->
+    <div class="earth-header">
+        <h1>Air Quality Survey</h1>
+    </div>
+    
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+            <li><a href="{{ url_for('survey') }}" class="active">Survey</a></li>
+            <li><a href="{{ url_for('logout') }}">Logout</a></li>
+        </ul>
+    </nav>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="flash-message">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <div class="survey-container">
+        <h2>{{ question['question'] }}</h2>
+        
+        <!-- Survey Form -->
+        <form method="POST">
+            <div class="question-container">
+                <label for="answer">Rate from 1 (low) to 10 (high):</label><br>
+                <!-- Slider input for answers -->
+                <input type="range" name="{{ question['name'] }}" min="1" max="10" value="{{ session.get('answer_' ~ current_question, 5)|int }}" step="1" id="answer" class="slider">
+                <p id="answer-text">Value: {{ session.get('answer_' ~ current_question, 5)|int }}</p>
+            </div>
+
+            <div class="navigation-buttons">
+                <!-- Previous and Next buttons -->
+                <button type="submit" name="previous" value="previous" {% if previous_button_disabled %}disabled{% endif %}>Previous</button>
+                <button type="submit" name="next" value="next">{{ next_button_text }}</button>
+            </div>
+        </form>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/survey.js') }}"></script>
+</body>
+</html>

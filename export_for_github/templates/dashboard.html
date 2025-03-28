@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Pollution Monitoring System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home_style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/header.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .dashboard-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+        
+        .chart-container {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .chart-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+        
+        .chart-box {
+            flex: 0 0 48%;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        .data-table th, .data-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .data-table th {
+            background-color: #f4f7fc;
+            font-weight: 600;
+        }
+        
+        .data-table tr:hover {
+            background-color: #f9f9f9;
+        }
+        
+
+        
+        @media screen and (max-width: 768px) {
+            .chart-row {
+                flex-direction: column;
+            }
+            
+            .chart-box {
+                flex: 0 0 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Earth Header Image -->
+    <div class="earth-header">
+        <h1>Air Quality Dashboard</h1>
+    </div>
+    
+    <!-- Navbar Section -->
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('dashboard') }}" class="active">Dashboard</a></li>
+            <li><a href="{{ url_for('survey') }}">Survey</a></li>
+            <li><a href="{{ url_for('logout') }}">Logout</a></li>
+        </ul>
+    </nav>
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="flash-container">
+                {% for message in messages %}
+                    <div class="flash-message">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <!-- Dashboard Container -->
+    <div class="dashboard-container">
+        <h2 style="text-align: center; margin-bottom: 30px;">Air Quality Dashboard</h2>
+        
+        <!-- Charts Section -->
+        <div class="chart-row">
+            <!-- Air Quality Distribution Chart -->
+            <div class="chart-box">
+                <h3>Air Quality Distribution</h3>
+                <canvas id="qualityChart" data-counts='{{ quality_counts }}'></canvas>
+            </div>
+            
+            <!-- Average Pollutant Values Chart -->
+            <div class="chart-box">
+                <h3>Average Pollutant Values</h3>
+                <canvas id="pollutantChart" data-pollutants='{{ avg_pollutants }}'></canvas>
+            </div>
+        </div>
+        
+        <!-- Recent Submissions Table -->
+        <div class="chart-container">
+            <h3>Recent Survey Submissions</h3>
+            {% if recent_submissions %}
+                <div style="overflow-x: auto;">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Air Quality</th>
+                                <th>Traffic (CO)</th>
+                                <th>Car Exhaust</th>
+                                <th>Air Pollution</th>
+                                <th>Industrial</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for entry in recent_submissions %}
+                                <tr>
+                                    <td>{{ entry.Date }}</td>
+                                    <td>{{ entry.Time }}</td>
+                                    <td>{{ entry['Air Quality'] }}</td>
+                                    <td>{{ entry['CO(GT)'] }}</td>
+                                    <td>{{ entry['PT08.S1(CO)'] }}</td>
+                                    <td>{{ entry['NMHC(GT)'] }}</td>
+                                    <td>{{ entry['C6H6(GT)'] }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <p>No survey data available yet. Complete the survey to see results here.</p>
+            {% endif %}
+        </div>
+        
+        <div style="text-align: center; margin-top: 40px;">
+            <a href="{{ url_for('survey') }}" class="btn">Take New Survey</a>
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2025 Pollution Monitoring System. All rights reserved.</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/chart.js') }}"></script>
+</body>
+</html>

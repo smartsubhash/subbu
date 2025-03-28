@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pollution Monitoring System</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/home_style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/header.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <!-- Earth Header Image -->
+  <div class="earth-header">
+    <h1>Pollution Monitoring System</h1>
+  </div>
+
+  <!-- Header / Navbar Section -->
+  <nav>
+    <ul>
+      <li><a href="{{ url_for('home') }}" class="active">Home</a></li>
+      <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+      <li><a href="{{ url_for('survey') }}">Survey</a></li>
+      <li><a href="{{ url_for('logout') }}">Logout</a></li>
+    </ul>
+  </nav>
+
+  <!-- Flash Messages -->
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <div class="flash-container">
+        {% for message in messages %}
+          <div class="flash-message">{{ message }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+
+  <!-- Hero Section with Gradient Background -->
+  <section class="hero" style="background: linear-gradient(135deg, #2c3e50, #4CA1AF); height: 500px; display: flex; justify-content: center; align-items: center; text-align: center;">
+    <div class="content" style="max-width: 80%; color: white; text-shadow: 1px 1px 3px rgba(0,0,0,0.6);">
+      <h1 style="font-size: 48px; margin-bottom: 20px;">Welcome to the Pollution Monitoring System</h1>
+      <p style="font-size: 20px; margin-bottom: 30px;">Track and analyze pollution levels in your environment using advanced data analytics. Join us in creating a cleaner, healthier planet!</p>
+      <a href="{{ url_for('survey')}}" class="btn" style="background-color: #FF5733; color: white; padding: 15px 30px; font-size: 18px; text-decoration: none; border-radius: 5px; display: inline-block; transition: background-color 0.3s;">Start Survey</a>
+    </div>
+  </section>
+
+  <!-- About the Web Application Section -->
+  <section class="about-app">
+    <div class="container">
+      <div class="text-content">
+        <h2>About the Web Application</h2>
+        <p>Our Pollution Monitoring System is designed to help individuals, organizations, and governments track and manage pollution levels in their environment. By leveraging the power of data analysis, the system provides real-time insights into air quality. Users can manually input data or analyze pre-existing datasets to assess pollution levels and take proactive measures to protect our planet.</p>
+        <p><strong>Key Features:</strong></p>
+        <ul>
+          <li>Real-time pollution tracking and analysis using advanced algorithms</li>
+          <li>User-friendly interface to input and analyze environmental data</li>
+          <li>Real-time feedback on air pollution levels</li>
+          <li>Insights into pollution categories such as Very Poor, Poor, Average, Good, and Very Good</li>
+          <li>Interactive visualizations and reports for better decision-making</li>
+        </ul>
+      </div>
+      <div class="image-content">
+        <img src="{{ url_for('static', filename='images/earth-graphic.png') }}" alt="Earth Graphic" class="app-image">
+      </div>
+    </div>
+  </section>
+
+  <!-- Inspirational Quotes Section -->
+  <section class="quote-section">
+    <div class="container">
+      <h2>Inspiring Quotes</h2>
+      <div class="quote">
+        <p>"The Earth is what we all have in common." – Wendell Berry</p>
+      </div>
+      <div class="quote">
+        <p>"What we are doing to the forests of the world is but a mirror reflection of what we are doing to ourselves and to our fellow man." – Mahatma Gandhi</p>
+      </div>
+      <div class="quote">
+        <p>"We won't have a society if we destroy the environment." – Margaret Mead</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Get Started Section -->
+  <div class="container" id="surveySection">
+    <h2>Get Started</h2>
+    <p>Ready to begin your journey toward a cleaner, greener world? Our system provides an easy-to-use platform for analyzing pollution data. By starting the survey, you will contribute to building a better understanding of environmental issues and help create actionable solutions.</p>
+    <a href="{{ url_for('survey') }}" class="btn">Start Survey Now</a>
+  </div>
+
+  <!-- Dashboard Link -->
+  <div class="dashboard-link">
+    <a href="{{ url_for('dashboard') }}" class="dashboard-btn">View Data Dashboard</a>
+  </div>
+
+  <!-- Footer Section -->
+  <footer>
+    <p>&copy; 2025 Pollution Monitoring System. All rights reserved.</p>
+  </footer>
+
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
