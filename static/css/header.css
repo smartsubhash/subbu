@@ -1,50 +1,24 @@
-/* Header with Earth Background */
-.earth-header {
-    width: 100%;
-    height: 180px;
-    background-image: url('../images/earth-graphic.png');
-    background-size: cover;
-    background-position: center;
-    margin: 0;
-    padding: 0;
-    position: relative;
+/* Modern Header Styling */
+header {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-}
-
-.earth-header::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.3);
-    z-index: 1;
-}
-
-.earth-header h1 {
-    color: #ffffff;
-    text-align: center;
-    font-size: 2.5rem;
+    padding: 15px 30px;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     position: relative;
-    z-index: 2;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-/* Override for existing styles that might conflict */
-body {
-    margin: 0;
-    padding: 0;
-    display: block;
-    height: auto;
+.logo {
+    font-size: 24px;
+    font-weight: 700;
+    color: #333;
 }
 
-/* Top navigation bar style */
+/* Navigation styling */
 nav {
-    background-color: #333;
-    padding: 10px 0;
+    background-color: transparent;
+    padding: 0;
     margin: 0;
 }
 
@@ -53,7 +27,7 @@ nav ul {
     list-style: none;
     margin: 0;
     padding: 0;
-    justify-content: center;
+    justify-content: flex-end;
 }
 
 nav li {
@@ -61,22 +35,32 @@ nav li {
 }
 
 nav a {
-    color: white;
+    color: #000;
     text-decoration: none;
-    font-weight: 500;
+    font-weight: 600;
     transition: all 0.3s ease;
     padding: 5px 10px;
     border-radius: 4px;
 }
 
 nav a:hover {
-    background-color: #FF5733;
-    color: white;
+    color: #FF5733;
+    background-color: transparent;
 }
 
 nav a.active {
-    background-color: #FF5733;
-    color: white;
+    color: #FF5733;
+    background-color: transparent;
+    border-bottom: 2px solid #FF5733;
+}
+
+/* Override for existing styles that might conflict */
+body {
+    margin: 0;
+    padding: 0;
+    display: block;
+    height: auto;
+    font-family: 'Poppins', sans-serif;
 }
 
 /* Main content wrapper adjustment */
@@ -102,12 +86,13 @@ nav a.active {
 
 /* Responsive design */
 @media (max-width: 768px) {
-    .earth-header {
-        height: 120px;
+    header {
+        flex-direction: column;
+        padding: 15px;
     }
     
-    .earth-header h1 {
-        font-size: 1.8rem;
+    .logo {
+        margin-bottom: 15px;
     }
     
     nav ul {

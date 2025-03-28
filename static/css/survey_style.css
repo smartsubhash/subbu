@@ -17,42 +17,7 @@ h2 {
     margin-bottom: 20px;
 }
 
-/* Navbar Styles */
-nav {
-    background-color: #fff; /* Dark background for the navbar */
-    width: 100%; /* Full width */
-    position: sticky; /* Position it at the top */
-    top: 0; /* Align to the top */
-    right: 0; /* Align to the right */
-    padding: 10px; /* Add some padding */
-    z-index: 1000; /* Ensure it stays above other content */
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-nav ul {
-    list-style: none;
-    display: flex;
-    justify-content: flex-end; /* Align items to the right */
-    margin: 0; /* Remove default margin */
-    padding: 0 20px; /* Remove default padding */
-}
-
-nav ul li {
-    margin: 0 15px; /* Space between items */
-}
-
-nav ul li a {
-    text-decoration: none;
-    font-size: 18px;
-    color: #333; /* Change text color to white */
-    transition: color 0.3s;
-}
-
-nav ul li a:hover,
-nav ul li a.active {
-    color: #FF5733; /* Change color on hover */
-    font-weight: bold;
-}
+/* Navbar styles are now in header.css */
 
 /* Flash Messages */
 .flash-message {
