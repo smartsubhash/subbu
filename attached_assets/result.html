@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Survey Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='survey_style.css') }}">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('logout') }}">Logout</a></li>
+        </ul>
+    </nav>
+
+    <!-- Result Container -->
+    <div class="survey-container">
+        <h2>Survey Result</h2>
+        <div class="question-container">
+            <p><span class="result-text">Your predicted air quality is:</span> <span class="predicted-value">{{ category }}</span></p>
+        </div>
+    </div>
+</body>
+</html>

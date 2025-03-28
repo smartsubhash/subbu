@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pollution Monitoring System</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='home_style.css') }}">
+</head>
+<body>
+
+  <!-- Header / Navbar Section -->
+  <header>
+    <div class="logo">Pollution Monitoring</div>
+    <nav>
+      <ul>
+        <li><a href="{{ url_for('home') }}" class="active">Home</a></li>
+        <li><a href="{{ url_for('logout') }}">Logout</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="overlay"></div>
+    <div class="content">
+      <h1>Welcome to the Pollution Monitoring System</h1>
+      <p>Track and analyze pollution levels in your environment using advanced machine learning algorithms. Join us in creating a cleaner, healthier planet!</p>
+      <a href="{{ url_for('survey')}}" class="btn">Start Survey</a>
+    </div>
+  </section>
+
+  <!-- About the Web Application Section -->
+  <section class="about-app">
+    <div class="container">
+      <div class="text-content">
+        <h2>About the Web Application</h2>
+        <p>Our Pollution Monitoring System is designed to help individuals, organizations, and governments track and manage pollution levels in their environment. By leveraging the power of machine learning and data analysis, the system provides real-time insights into air, water, and soil quality. Users can manually input data or analyze pre-existing datasets to assess pollution levels and take proactive measures to protect our planet.</p>
+        <p><strong>Key Features:</strong></p>
+        <ul>
+          <li>Real-time pollution tracking and analysis using machine learning models</li>
+          <li>User-friendly interface to input and analyze environmental data</li>
+          <li>Real-time feedback on air, water, and soil pollution levels</li>
+          <li>Insights into pollution categories such as Very Poor, Poor, Average, Good, and Very Good</li>
+          <li>Interactive visualizations and reports for better decision-making</li>
+        </ul>
+      </div>
+      <div class="image-content">
+        <img src="/static/images/earth-graphic.png" alt="Earth Graphic" class="app-image">
+      </div>
+    </div>
+  </section>
+
+  <!-- Inspirational Quotes Section -->
+  <section class="quote-section">
+    <div class="container">
+      <h2>Inspiring Quotes</h2>
+      <div class="quote">
+        <p>"The Earth is what we all have in common." – Wendell Berry</p>
+      </div>
+      <div class="quote">
+        <p>"What we are doing to the forests of the world is but a mirror reflection of what we are doing to ourselves and to our fellow man." – Mahatma Gandhi</p>
+      </div>
+      <div class="quote">
+        <p>"We won't have a society if we destroy the environment." – Margaret Mead</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Get Started Section -->
+  <div class="container" id="surveySection">
+    <h2>Get Started</h2>
+    <p>Ready to begin your journey toward a cleaner, greener world? Our system provides an easy-to-use platform for analyzing pollution data. By starting the survey, you will contribute to building a better understanding of environmental issues and help create actionable solutions.</p>
+    <a href="{{ url_for('survey') }}" class="btn">Start Survey Now</a>
+  </div>
+
+  <!-- Footer Section -->
+  <footer>
+    <p>&copy; 2025 Pollution Monitoring System. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>

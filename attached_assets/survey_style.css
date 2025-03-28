@@ -1,0 +1,240 @@
+/* General Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f4f7fc;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column; /* Allow vertical stacking of navbar and content */
+    align-items: center;
+    height: 100vh;
+    overflow: hidden; /* Ensure it fills the entire screen */
+}
+
+h2 {
+    text-align: center;
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Navbar Styles */
+nav {
+    background-color: #fff; /* Dark background for the navbar */
+    width: 100%; /* Full width */
+    position: absolute; /* Position it absolutely */
+    top: 0; /* Align to the top */
+    right: 0; /* Align to the right */
+    padding: 10px; /* Add some padding */
+    z-index: 1000; /* Ensure it stays above other content */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: flex-end; /* Align items to the right */
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+}
+
+nav ul li {
+    margin: 0 15px; /* Space between items */
+}
+
+nav ul li a {
+    text-decoration: none;
+    font-size: 18px;
+    color: #333; /* Change text color to white */
+    transition: color 0.3s;
+}
+
+nav ul li a:hover,
+nav ul li a.active {
+    color: #FF5733; /* Change color on hover */
+    font-weight: bold;
+}
+
+/* Survey Container: Make it wider and more spacious */
+.survey-container {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 40px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 200px;
+    width: 80%; /* Make the container wider */
+    max-width: 1500px; /* Maximum width */
+    position: relative;
+    z-index: 1;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 40%; /* Adjust height for a spacious feel */
+    overflow-y: auto; /* Scrollable content */
+}
+
+/* Hover effect for the form container */
+.survey-container:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.question-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#answer {
+    width: 60%; /* Reduced width for the slider */
+    margin-top: 20px;
+}
+
+/* Smaller slider styles */
+.slider {
+    width: 100%;
+    height: 10px; /* Smaller height for the slider */
+    -webkit-appearance: none;
+    appearance: none;
+    background: #ddd;
+    border-radius: 5px;
+    outline: none;
+    transition: background 0.3s ease;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px; /* Smaller thumb size */
+    height: 25px;
+    background: #4CAF50;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.slider::-webkit-slider-thumb:hover {
+    background: #45a049;
+}
+
+.slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    background: #4CAF50;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.slider::-moz-range-thumb:hover {
+    background: #45a049;
+}
+
+/* Slider value text */
+#answer-text {
+    margin-top: 10px;
+    font-size: 16px;
+    color: #555;
+}
+
+/* Additional Styles for Result Page */
+.result-container {
+    text-align: center;
+    margin-top: 40px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.result-container h2 {
+    font-size: 28px;
+    color: #444;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.result-container p {
+    font-size: 20px;
+    color: #333;
+    margin-top: 15px;
+    line-height: 1.6;
+}
+
+.result-container strong {
+    color: #FF5733; /* Highlight the result with the same color as buttons */
+    font-weight: 700;
+}
+
+.result-text {
+    font-size: 24px; /* Larger font size */
+    color: #333; /* Dark gray color */
+    margin-top: 10px; /* Spacing */
+}
+
+.result-container .icon {
+    font-size: 40px;
+    color: #FF5733;
+    margin-bottom: 15px;
+}
+
+.predicted-value {
+    font-size: 36px; /* Larger font size */
+    color: #FF5733; /* Orange color */
+    font-weight: bold; /* Bold text */
+    margin-top: 10px; /* Spacing */
+}
+
+.result-container .button {
+    margin-top: 25px;
+    padding: 12px 24px;
+    font-size: 18px;
+    color: #fff;
+    background-color: #FF5733;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.result-container .button:hover {
+    background-color: #e64a2e;
+}
+/* Buttons */
+.navigation-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    width: 30%;
+    margin-left: 430px;
+}
+
+button {
+    width: 45%;
+    padding: 12px;
+    background-color: #FF5733;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Hover effect for buttons */
+button:hover {
+    background-color: #C70039;
+    transform: scale(1.05);
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    .survey-container {
+        width: 95%; /* Adjust width for smaller screens */
+        height: 90%; /* Adjust height for smaller screens */
+    }
+
+    #answer {
+        width: 80%; /* Adjust slider width for small screens */
+    }
+}
