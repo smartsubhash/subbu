@@ -233,6 +233,15 @@ footer {
 
 /* Responsive Styling */
 @media screen and (max-width: 768px) {
+    header {
+        padding: 15px 20px;
+        flex-direction: column;
+    }
+    
+    .logo {
+        margin-bottom: 15px;
+    }
+    
     .content h1 {
         font-size: 36px;
     }
@@ -248,9 +257,5 @@ footer {
     .text-content, .image-content {
         flex: none;
         width: 100%;
-    }
-    
-    .hero {
-        height: 70vh; /* Smaller height on mobile */
     }
 }

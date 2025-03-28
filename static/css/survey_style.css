@@ -1,154 +1,73 @@
-/* General Styles */
 body {
     font-family: 'Poppins', sans-serif;
-    background-color: #f4f7fc;
     margin: 0;
     padding: 0;
-    display: flex;
-    flex-direction: column; /* Allow vertical stacking of navbar and content */
-    align-items: center;
-    min-height: 100vh;
-}
-
-h2 {
-    text-align: center;
-    font-size: 28px;
+    background-color: #f8f9fa;
     color: #333;
-    margin-bottom: 20px;
 }
 
-/* Navbar styles are now in header.css */
-
-/* Flash Messages */
-.flash-message {
-    background-color: #FF5733;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
-    margin: 10px 0;
-    text-align: center;
-    width: 80%;
-    max-width: 600px;
-}
-
-/* Survey Container: Make it wider and more spacious */
 .survey-container {
+    max-width: 800px;
+    margin: 40px auto;
     background-color: #fff;
-    padding: 40px;
-    border-radius: 20px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    margin-top: 50px;
-    width: 80%; /* Make the container wider */
-    max-width: 800px; /* Maximum width */
-    position: relative;
-    z-index: 1;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    min-height: 300px; /* Minimum height */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin-bottom: 50px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    padding: 30px;
 }
 
-/* Hover effect for the form container */
-.survey-container:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+.survey-container h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
 }
 
 .question-container {
-    text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
 }
 
-/* Slider styles */
+.question-container label {
+    display: block;
+    font-size: 18px;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
 .slider {
     width: 100%;
-    height: 10px; /* Smaller height for the slider */
-    -webkit-appearance: none;
-    appearance: none;
-    background: #ddd;
-    border-radius: 5px;
+    height: 25px;
+    background: #f1f1f1;
     outline: none;
-    transition: background 0.3s ease;
+    border-radius: 15px;
     margin: 20px 0;
 }
 
-.slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 25px; /* Smaller thumb size */
-    height: 25px;
-    background: #4CAF50;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: background 0.3s ease;
-}
-
-.slider::-webkit-slider-thumb:hover {
-    background: #45a049;
-}
-
-.slider::-moz-range-thumb {
-    width: 25px;
-    height: 25px;
-    background: #4CAF50;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: background 0.3s ease;
-}
-
-.slider::-moz-range-thumb:hover {
-    background: #45a049;
-}
-
-/* Slider value text */
 #answer-text {
-    margin-top: 10px;
-    font-size: 16px;
-    color: #555;
+    text-align: center;
+    font-size: 18px;
+    margin-top: 15px;
+    font-weight: 500;
 }
 
-/* Result text styling */
-.result-text {
-    font-size: 22px;
-    color: #333;
-    margin: 10px 0;
-}
-
-.predicted-value {
-    font-size: 32px;
-    color: #FF5733;
-    font-weight: bold;
-    margin: 10px 0;
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #f8f8f8;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-/* Navigation buttons */
 .navigation-buttons {
     display: flex;
     justify-content: space-between;
     margin-top: 30px;
-    width: 100%;
-    max-width: 400px;
-    margin-left: auto;
-    margin-right: auto;
 }
 
 button {
-    width: 45%;
-    padding: 12px;
+    padding: 12px 25px;
     background-color: #FF5733;
     color: white;
     border: none;
     border-radius: 5px;
-    font-size: 16px;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-size: 16px;
+    font-weight: 500;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #E64A19;
 }
 
 button:disabled {
@@ -156,26 +75,23 @@ button:disabled {
     cursor: not-allowed;
 }
 
-/* Hover effect for buttons */
-button:hover:not(:disabled) {
-    background-color: #C70039;
-    transform: scale(1.05);
+.flash-message {
+    background-color: #e8f5e9;
+    border-left: 5px solid #4caf50;
+    padding: 15px 20px;
+    margin: 20px 0;
+    color: #2e7d32;
+    border-radius: 5px;
 }
 
-/* Media Queries for Responsiveness */
-@media (max-width: 768px) {
+/* Responsive Styles */
+@media screen and (max-width: 768px) {
     .survey-container {
-        width: 95%; /* Adjust width for smaller screens */
+        margin: 20px 15px;
         padding: 20px;
     }
-
-    .navigation-buttons {
-        flex-direction: column;
-        align-items: center;
-    }
-
+    
     button {
-        width: 100%;
-        margin: 5px 0;
+        padding: 10px 20px;
     }
 }

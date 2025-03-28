@@ -5,34 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pollution Monitoring System</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/home_style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/header.css') }}">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-  <style>
-    nav ul li a {
-      color: #000;
-      font-weight: 600;
-    }
-    
-    nav ul li a:hover,
-    nav ul li a.active {
-      color: #FF5733;
-      background-color: transparent;
-    }
-  </style>
 </head>
 <body>
+  <!-- Earth Header Image -->
+  <div class="earth-header">
+    <h1>Pollution Monitoring System</h1>
+  </div>
+
   <!-- Header / Navbar Section -->
-  <header>
-    <div class="logo">Pollution Monitoring</div>
-    <nav>
-      <ul>
-        <li><a href="{{ url_for('home') }}" class="active">Home</a></li>
-        <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
-        <li><a href="{{ url_for('survey') }}">Survey</a></li>
-        <li><a href="{{ url_for('logout') }}">Logout</a></li>
-      </ul>
-    </nav>
-  </header>
+  <nav>
+    <ul>
+      <li><a href="{{ url_for('home') }}" class="active">Home</a></li>
+      <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+      <li><a href="{{ url_for('survey') }}">Survey</a></li>
+      <li><a href="{{ url_for('logout') }}">Logout</a></li>
+    </ul>
+  </nav>
 
   <!-- Flash Messages -->
   {% with messages = get_flashed_messages() %}
