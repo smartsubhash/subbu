@@ -1,0 +1,121 @@
+/* Header with Earth Background */
+.earth-header {
+    width: 100%;
+    height: 180px;
+    background-image: url('../images/earth-graphic.png');
+    background-size: cover;
+    background-position: center;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.earth-header::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 1;
+}
+
+.earth-header h1 {
+    color: #ffffff;
+    text-align: center;
+    font-size: 2.5rem;
+    position: relative;
+    z-index: 2;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Override for existing styles that might conflict */
+body {
+    margin: 0;
+    padding: 0;
+    display: block;
+    height: auto;
+}
+
+/* Top navigation bar style */
+nav {
+    background-color: #333;
+    padding: 10px 0;
+    margin: 0;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    justify-content: center;
+}
+
+nav li {
+    margin: 0 15px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    padding: 5px 10px;
+    border-radius: 4px;
+}
+
+nav a:hover {
+    background-color: #FF5733;
+    color: white;
+}
+
+nav a.active {
+    background-color: #FF5733;
+    color: white;
+}
+
+/* Main content wrapper adjustment */
+.content-wrapper {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Flash messages */
+.flash-message {
+    background-color: #FF5733;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin: 10px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: opacity 0.5s ease-out;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .earth-header {
+        height: 120px;
+    }
+    
+    .earth-header h1 {
+        font-size: 1.8rem;
+    }
+    
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    nav li {
+        margin: 5px 0;
+    }
+}

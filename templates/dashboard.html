@@ -5,12 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - Pollution Monitoring System</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/home_style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/header.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         .dashboard-container {
             max-width: 1200px;
-            margin: 120px auto 40px;
+            margin: 40px auto;
             padding: 20px;
         }
         
@@ -71,18 +72,20 @@
     </style>
 </head>
 <body>
-    <!-- Header / Navbar Section -->
-    <header>
-        <div class="logo">Pollution Monitoring</div>
-        <nav>
-            <ul>
-                <li><a href="{{ url_for('home') }}">Home</a></li>
-                <li><a href="{{ url_for('dashboard') }}" class="active">Dashboard</a></li>
-                <li><a href="{{ url_for('survey') }}">Survey</a></li>
-                <li><a href="{{ url_for('logout') }}">Logout</a></li>
-            </ul>
-        </nav>
-    </header>
+    <!-- Earth Header Image -->
+    <div class="earth-header">
+        <h1>Air Quality Dashboard</h1>
+    </div>
+    
+    <!-- Navbar Section -->
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('dashboard') }}" class="active">Dashboard</a></li>
+            <li><a href="{{ url_for('survey') }}">Survey</a></li>
+            <li><a href="{{ url_for('logout') }}">Logout</a></li>
+        </ul>
+    </nav>
 
     <!-- Flash Messages -->
     {% with messages = get_flashed_messages() %}
