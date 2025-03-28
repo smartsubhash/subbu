@@ -1,0 +1,216 @@
+/* General Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f4f7fc;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column; /* Allow vertical stacking of navbar and content */
+    align-items: center;
+    min-height: 100vh;
+}
+
+h2 {
+    text-align: center;
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Navbar Styles */
+nav {
+    background-color: #fff; /* Dark background for the navbar */
+    width: 100%; /* Full width */
+    position: sticky; /* Position it at the top */
+    top: 0; /* Align to the top */
+    right: 0; /* Align to the right */
+    padding: 10px; /* Add some padding */
+    z-index: 1000; /* Ensure it stays above other content */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: flex-end; /* Align items to the right */
+    margin: 0; /* Remove default margin */
+    padding: 0 20px; /* Remove default padding */
+}
+
+nav ul li {
+    margin: 0 15px; /* Space between items */
+}
+
+nav ul li a {
+    text-decoration: none;
+    font-size: 18px;
+    color: #333; /* Change text color to white */
+    transition: color 0.3s;
+}
+
+nav ul li a:hover,
+nav ul li a.active {
+    color: #FF5733; /* Change color on hover */
+    font-weight: bold;
+}
+
+/* Flash Messages */
+.flash-message {
+    background-color: #FF5733;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin: 10px 0;
+    text-align: center;
+    width: 80%;
+    max-width: 600px;
+}
+
+/* Survey Container: Make it wider and more spacious */
+.survey-container {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 50px;
+    width: 80%; /* Make the container wider */
+    max-width: 800px; /* Maximum width */
+    position: relative;
+    z-index: 1;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    min-height: 300px; /* Minimum height */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 50px;
+}
+
+/* Hover effect for the form container */
+.survey-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.question-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Slider styles */
+.slider {
+    width: 100%;
+    height: 10px; /* Smaller height for the slider */
+    -webkit-appearance: none;
+    appearance: none;
+    background: #ddd;
+    border-radius: 5px;
+    outline: none;
+    transition: background 0.3s ease;
+    margin: 20px 0;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px; /* Smaller thumb size */
+    height: 25px;
+    background: #4CAF50;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.slider::-webkit-slider-thumb:hover {
+    background: #45a049;
+}
+
+.slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    background: #4CAF50;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.slider::-moz-range-thumb:hover {
+    background: #45a049;
+}
+
+/* Slider value text */
+#answer-text {
+    margin-top: 10px;
+    font-size: 16px;
+    color: #555;
+}
+
+/* Result text styling */
+.result-text {
+    font-size: 22px;
+    color: #333;
+    margin: 10px 0;
+}
+
+.predicted-value {
+    font-size: 32px;
+    color: #FF5733;
+    font-weight: bold;
+    margin: 10px 0;
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #f8f8f8;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Navigation buttons */
+.navigation-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    width: 100%;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+button {
+    width: 45%;
+    padding: 12px;
+    background-color: #FF5733;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* Hover effect for buttons */
+button:hover:not(:disabled) {
+    background-color: #C70039;
+    transform: scale(1.05);
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    .survey-container {
+        width: 95%; /* Adjust width for smaller screens */
+        padding: 20px;
+    }
+
+    .navigation-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    button {
+        width: 100%;
+        margin: 5px 0;
+    }
+}

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Survey Result - Pollution Monitoring System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/survey_style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+            <li><a href="{{ url_for('survey') }}">Survey</a></li>
+            <li><a href="{{ url_for('logout') }}">Logout</a></li>
+        </ul>
+    </nav>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="flash-message">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <!-- Result Container -->
+    <div class="survey-container">
+        <h2>Survey Result</h2>
+        <div class="question-container">
+            <p class="result-text">Based on your responses, the predicted air quality is:</p>
+            <p class="predicted-value">{{ category }}</p>
+            
+            <div style="margin-top: 30px;">
+                {% if category == 'Very Good' %}
+                    <p>Excellent! The air quality in your area appears to be very healthy.</p>
+                {% elif category == 'Good' %}
+                    <p>Nice! Your area has good air quality with minimal pollution concerns.</p>
+                {% elif category == 'Average' %}
+                    <p>Your area has moderate air quality. There's room for improvement, but it's not concerning.</p>
+                {% elif category == 'Poor' %}
+                    <p>Your area has significant pollution issues that may affect health. Consider taking precautions.</p>
+                {% elif category == 'Very Poor' %}
+                    <p>Warning: The air quality in your area is concerning and may pose serious health risks.</p>
+                {% endif %}
+            </div>
+            
+            <div style="margin-top: 40px;">
+                <a href="{{ url_for('dashboard') }}" style="text-decoration: none;">
+                    <button type="button" style="max-width: 300px; margin: 0 auto;">View Dashboard</button>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
