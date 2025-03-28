@@ -1,10 +1,12 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session, jsonify
-import sqlite3
 import pandas as pd
 from datetime import datetime
 import os
 import logging
 import json
+from flask_sqlalchemy import SQLAlchemy
+from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 
 # Configure logging
 logging.basicConfig(level=logging.DEBUG)
@@ -13,18 +15,27 @@ logging.basicConfig(level=logging.DEBUG)
 app = Flask(__name__)
 app.secret_key = os.environ.get("SESSION_SECRET", "your_secret_key")  # For flash messages and session management
 
-# SQLite database setup
-def get_db_connection():
-    conn = sqlite3.connect('users.db')  # Create/Connect to SQLite database
-    conn.row_factory = sqlite3.Row  # This allows us to access columns by name
-    return conn
+# Database configuration
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL", "sqlite:///users.db")
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-# Initialize the database (only need to run once)
+# Initialize SQLAlchemy
+from models import db, User
+db.init_app(app)
+
+# Initialize Flask-Login
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = 'login'
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+
+# Initialize the database
 def init_db():
-    conn = get_db_connection()
-    conn.execute('CREATE TABLE IF NOT EXISTS users (username TEXT PRIMARY KEY, email TEXT, password TEXT)')
-    conn.commit()
-    conn.close()
+    with app.app_context():
+        db.create_all()
 
 # Load the air quality dataset
 def load_air_quality_data():
@@ -58,20 +69,18 @@ def load_survey_responses():
 # Routes
 @app.route('/')
 def index():
-    if 'username' not in session:
+    if not current_user.is_authenticated:
         return redirect(url_for('login'))
     return redirect(url_for('home'))
 
 @app.route('/home')
+@login_required
 def home():
-    if 'username' not in session:
-        flash("You must be logged in to access this page.")
-        return redirect(url_for('login'))
-    return render_template('home.html', username=session['username'])
+    return render_template('home.html', username=current_user.username)
 
 @app.route('/login', methods=['GET'])
 def login():
-    if 'username' in session:
+    if current_user.is_authenticated:
         return redirect(url_for('home'))
     return render_template('login.html')
 
@@ -80,12 +89,11 @@ def login_post():
     username = request.form['username']
     password = request.form['password']
     
-    conn = get_db_connection()
-    user = conn.execute('SELECT * FROM users WHERE username = ?', (username,)).fetchone()
-    conn.close()
+    user = User.query.filter_by(username=username).first()
     
     if user:
-        if user['password'] == password:
+        if check_password_hash(user.password_hash, password):
+            login_user(user)
             session['username'] = username
             flash("Login successful!")
             return redirect(url_for('home'))
@@ -104,27 +112,27 @@ def signup():
         password = request.form['password']
         
         # Check if username already exists in the database
-        conn = get_db_connection()
-        existing_user = conn.execute('SELECT * FROM users WHERE username = ?', (username,)).fetchone()
+        existing_user = User.query.filter_by(username=username).first()
         
         if existing_user:
             flash("Username already exists. Please choose another one.")
         else:
+            # Create a new user with hashed password
+            hashed_password = generate_password_hash(password)
+            new_user = User(username=username, email=email, password_hash=hashed_password)
+            
             # Add new user to the database
-            conn.execute('INSERT INTO users (username, email, password) VALUES (?, ?, ?)', (username, email, password))
-            conn.commit()
-            conn.close()
+            db.session.add(new_user)
+            db.session.commit()
+            
             flash("Sign up successful. Please log in.")
             return redirect(url_for('login'))
     
     return render_template('signup.html')
 
 @app.route('/result')
+@login_required
 def result():
-    if 'username' not in session:
-        flash("You must be logged in to access this page.")
-        return redirect(url_for('login'))
-        
     # Retrieve the prediction result from the session
     category = session.get('prediction_result', 'No result available')
     
@@ -134,10 +142,8 @@ def result():
     return render_template('result.html', category=category)
 
 @app.route('/survey', methods=['GET', 'POST'])
+@login_required
 def survey():
-    if 'username' not in session:
-        flash("You must be logged in to access this page.")
-        return redirect(url_for('login'))
         
     # Define the survey questions
     questions = [
@@ -252,10 +258,8 @@ def survey():
                            current_question=current_question)
 
 @app.route('/dashboard')
+@login_required
 def dashboard():
-    if 'username' not in session:
-        flash("You must be logged in to access this page.")
-        return redirect(url_for('login'))
     
     # Load the survey responses for visualization
     try:
@@ -284,9 +288,8 @@ def dashboard():
                                recent_submissions=[])
 
 @app.route('/api/data', methods=['GET'])
+@login_required
 def get_data():
-    if 'username' not in session:
-        return jsonify({'error': 'Authentication required'}), 401
     
     try:
         survey_df = pd.read_csv('survey_responses.csv')
@@ -297,7 +300,9 @@ def get_data():
 
 @app.route('/logout')
 def logout():
-    # Log the user out by clearing the session
+    # Log the user out with Flask-Login
+    logout_user()
+    # Also clear session variables
     session.pop('username', None)
     session.pop('current_question', None)
     flash("You have been logged out.")
