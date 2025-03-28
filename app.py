@@ -18,6 +18,10 @@ app.secret_key = os.environ.get("SESSION_SECRET", "your_secret_key")  # For flas
 # Database configuration
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL", "sqlite:///users.db")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {
+    "pool_recycle": 300,
+    "pool_pre_ping": True,
+}
 
 # Initialize SQLAlchemy
 from models import db, User
@@ -172,13 +176,37 @@ def survey():
         else:
             # Save the answer to the current question
             answer = request.form.get(questions[current_question]["name"])
-            if answer is not None:
-                session[f"answer_{current_question}"] = float(answer)  # Store the user-defined answer as float
+            if answer is not None and answer.strip():
+                try:
+                    # Store the user-defined answer as float
+                    session[f"answer_{current_question}"] = float(answer)
+                    # Store the answer value also with the session's permanent flag
+                    session.modified = True
+                except (ValueError, TypeError) as e:
+                    flash(f"Invalid answer format: {str(e)}")
+                    # Use a default valid value in case of error
+                    session[f"answer_{current_question}"] = 5.0
 
             # If it is the last question, process the data and make prediction
             if current_question == len(questions) - 1:
-                # Ensure no None values before making prediction
-                responses = {f"answer_{i}": session.get(f"answer_{i}") for i in range(len(questions))}
+                # Check if all questions have been answered
+                responses = {}
+                all_answered = True
+                
+                for i in range(len(questions)):
+                    answer_key = f"answer_{i}"
+                    answer_value = session.get(answer_key)
+                    
+                    if answer_value is None:
+                        # If any answer is missing, set default value
+                        session[answer_key] = 5.0
+                        responses[answer_key] = 5.0
+                        all_answered = False
+                    else:
+                        responses[answer_key] = answer_value
+                
+                if not all_answered:
+                    flash("Some questions were not answered. Default values have been used.")
                 
                 try:
                     # Calculate the total sum of responses
@@ -263,7 +291,25 @@ def dashboard():
     
     # Load the survey responses for visualization
     try:
+        # First check if the file exists and has content
+        if not os.path.exists('survey_responses.csv') or os.path.getsize('survey_responses.csv') == 0:
+            # Create a default placeholder for empty data
+            flash("No survey data available yet. Please take surveys to see visualization.")
+            return render_template('dashboard.html', 
+                                  quality_counts=json.dumps({}),
+                                  avg_pollutants=json.dumps({}),
+                                  recent_submissions=[])
+        
+        # Load the data if file exists and has content
         survey_df = pd.read_csv('survey_responses.csv')
+        
+        # Ensure data frame is not empty
+        if survey_df.empty:
+            flash("No survey data available yet. Please take surveys to see visualization.")
+            return render_template('dashboard.html', 
+                                  quality_counts=json.dumps({}),
+                                  avg_pollutants=json.dumps({}),
+                                  recent_submissions=[])
         
         # Count Air Quality categories for pie chart
         quality_counts = survey_df['Air Quality'].value_counts().to_dict()
@@ -281,6 +327,7 @@ def dashboard():
                                avg_pollutants=json.dumps(avg_pollutants),
                                recent_submissions=recent_submissions)
     except Exception as e:
+        logging.error(f"Dashboard error: {str(e)}")
         flash(f"Error loading dashboard data: {str(e)}")
         return render_template('dashboard.html', 
                                quality_counts=json.dumps({}),
@@ -292,10 +339,33 @@ def dashboard():
 def get_data():
     
     try:
+        # Check if file exists and has content
+        if not os.path.exists('survey_responses.csv') or os.path.getsize('survey_responses.csv') == 0:
+            return jsonify({'message': 'No survey data available'}), 404
+            
         survey_df = pd.read_csv('survey_responses.csv')
+        
+        # Check if dataframe is empty
+        if survey_df.empty:
+            return jsonify({'message': 'No survey data available'}), 404
+            
         quality_counts = survey_df['Air Quality'].value_counts().to_dict()
+        
+        # Add additional statistics if requested via query param
+        if request.args.get('stats', '').lower() == 'true':
+            # Calculate some basic statistics
+            pollutants = ['CO(GT)', 'PT08.S1(CO)', 'NMHC(GT)', 'C6H6(GT)', 'PT08.S2(NMHC)', 
+                         'NOx(GT)', 'PT08.S3(NOx)', 'NO2(GT)', 'PT08.S4(NO2)', 'PT08.S5(O3)', 'T']
+            stats = {
+                'counts': quality_counts,
+                'averages': {col: float(survey_df[col].mean()) for col in pollutants},
+                'total_submissions': len(survey_df)
+            }
+            return jsonify(stats)
+            
         return jsonify(quality_counts)
     except Exception as e:
+        logging.error(f"API error: {str(e)}")
         return jsonify({'error': str(e)}), 500
 
 @app.route('/logout')

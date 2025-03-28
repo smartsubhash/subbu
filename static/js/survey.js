@@ -4,8 +4,20 @@ document.addEventListener("DOMContentLoaded", function() {
     const answerText = document.getElementById('answer-text');
     
     if (slider && answerText) {
-        // Set the initial value of the slider text
-        answerText.textContent = `Value: ${slider.value}`;
+        // Initial value classification
+        let valueText;
+        const value = parseInt(slider.value);
+        
+        if (value <= 3) {
+            valueText = 'Low';
+        } else if (value <= 7) {
+            valueText = 'Moderate';
+        } else {
+            valueText = 'High';
+        }
+        
+        // Set the initial value of the slider text with classification
+        answerText.textContent = `Value: ${slider.value} (${valueText})`;
 
         // Update the slider text when the slider value changes
         slider.addEventListener('input', function() {
@@ -22,6 +34,19 @@ document.addEventListener("DOMContentLoaded", function() {
             
             answerText.textContent = `Value: ${slider.value} (${valueText})`;
         });
+        
+        // Make sure form is submitted with the current slider value
+        const form = slider.closest('form');
+        if (form) {
+            form.addEventListener('submit', function() {
+                // Set a hidden field to ensure the value is submitted
+                const hiddenInput = document.createElement('input');
+                hiddenInput.type = 'hidden';
+                hiddenInput.name = slider.name;
+                hiddenInput.value = slider.value;
+                form.appendChild(hiddenInput);
+            });
+        }
     }
     
     // Auto-hide flash messages after 5 seconds
